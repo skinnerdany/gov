@@ -7,6 +7,14 @@ $basePath = realpath(__DIR__ . DS . '..' . DS . '..') . DS;
 $appPath = $basePath . 'app' . DS;
 
 $mainConfig = [
+/*
+anastasiya
+denis
+dmitry
+ivan
+natalya
+*/
+    'dbClassName' => '',
     'basePath' => $basePath,
     'appPath' => $appPath,
     'controllers_dir' => $appPath . 'controllers' . DS,

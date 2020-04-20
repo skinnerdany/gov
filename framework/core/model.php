@@ -9,7 +9,7 @@ abstract class model
     public function __construct()
     {
         if (self::$db === false) {
-            self::$db = new pgsql();
+            self::$db = new db();
         }
         $this->tableName = get_class($this);
         $this->tableSchema = $this->getTableSchema();
