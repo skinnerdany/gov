@@ -27,7 +27,7 @@ natalya
     'default_controller' => 'catalog',
     'default_action' => 'list',
     'layout_dir' => $appPath . 'views' . DS . 'layouts' . DS,
-    'db' => include __DIR__ . DS . 'pgconf.php'
+    'db' => include __DIR__ . DS . 'db.php'
 ];
 
 return $mainConfig;
