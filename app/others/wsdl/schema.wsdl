@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:tns="http://wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+             name="WsdlTest"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+    
+    <types>
+        <xs:schema xmlns:tns="http://schemas.xmlsoap.org/wsdl/"
+                   xmlns="http://www.w3.org/2001/XMLSchema"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   elementFormDefault="qualified"
+                   targetNamespace="http://wsdl/">
+        </xs:schema>
+    </types>
+    
+    <service name="WsdlTest">
+        <port name="WsdlTestPort" binding="tns:WsdlTestBinding">
+            <soap:address location="http://wsdl/index.php" />
+        </port>
+    </service>
+    <binding name="WsdlTestBinding" type="tns:WsdlTestPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="wsdlTest">
+            <soap:operation soapAction="" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+        <operation name="wsdlSend">
+            <soap:operation soapAction="" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+        </operation>
+        
+    </binding>
+    <portType name="WsdlTestPortType">
+        <operation name="wsdlSend">
+            <input message="tns:wsdlSendRequest" />
+            <output message="tns:wsdlSendResponse" />
+        </operation>
+        <operation name="wsdlTest">
+            <input message="tns:wsdlTestRequest" />
+            <output message="tns:wsdlTestResponse" />
+        </operation>
+    </portType>
+    
+    <message name="wsdlSendRequest">
+        <part name="Request" element="tns:Request" />
+        <part name="Request" element="tns:Request" />
+    </message>
+    <message name="wsdlSendResponse">
+        <part name="Response" element="tns:Response" />
+    </message>
+    
+    <message name="wsdlTestRequest">
+        <part name="Request" element="tns:Request" />
+    </message>
+    <message name="wsdlTestResponse">
+        <part name="Response" element="tns:Response" />
+    </message>
+</definitions>
