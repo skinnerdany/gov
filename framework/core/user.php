@@ -16,7 +16,7 @@ class user
 
     public function __construct()
     {
-        $this->db = new pgsql();
+        $this->db = new db();
         // проверить, есть ли в сессии запись(БД) пользователя
         if (!isset($this->id)) {
             // если !п.1) то проверить, есть ли токен в куки пользователя

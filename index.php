@@ -1,8 +1,5 @@
 <?php
 
-print_r($argv);die();
-
-//echo '<pre>';print_r($_REQUEST);die();
 $config = include './app/config/main.php';
 
 if (DEBUG) {
