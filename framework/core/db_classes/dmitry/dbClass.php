@@ -47,7 +47,7 @@ class dbClass
     }
     public function query($sql)
     {
-        $result = mysqli_fetch_assoc($this->db->query($sql));
+        $result = $this->connection->query($sql);
         if (empty($result)) {
             $result = [];
         }
@@ -56,7 +56,7 @@ class dbClass
     
     public function escape($value)
     {
-        return mysqli_escape_string($this->db, $value);
+        return mysqli_escape_string($this->connection, $value);
     }
     
     public function select(string $table, $fields = '*', $where = [])
