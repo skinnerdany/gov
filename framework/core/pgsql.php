@@ -16,7 +16,7 @@ class pgsql
         }
     }
     
-    public function query($sql)
+    public function query(string $sql) : array
     {
         $result = pg_fetch_all(pg_query($this->connection, $sql));
         if (empty($result)) {
@@ -25,12 +25,12 @@ class pgsql
         return $result;
     }
     
-    public function escape($value)
+    public function escape(string $value) : string
     {
         return pg_escape_string($value);
     }
     
-    public function select(string $table, $fields = '*', $where = [])
+    public function select(string $table, $fields = '*', array $where = []) : array
     {
         $sql = 'SELECT ';
         $sql .= is_array($fields) ? implode(',', $fields) : $fields;
@@ -62,12 +62,12 @@ class pgsql
         return $id;
     }
 
-    public function delete(string $table, $where = [])
+    public function delete(string $table, array $where = [])
     {
         return $this->query('DELETE FROM ' . $table . $this->getWhere($where));
     }
 
-    public function update(string $table, $data, $where = [])
+    public function update(string $table, array $data, array $where = [])
     {
         $sql = 'UPDATE ' . $table . ' SET ';
         
