@@ -4,7 +4,7 @@ abstract class model
 {
     protected static $db = false;
     protected $tableSchema = false;
-    protected $tablleName = false;
+    protected $tableName = false;
     
     public function __construct()
     {
