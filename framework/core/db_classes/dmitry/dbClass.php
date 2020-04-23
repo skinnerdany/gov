@@ -1,35 +1,6 @@
-<!-- 
-    Query builder for MySQL
-
-    select()                    ===> ()='*', ('param1, param2, ...'), ['param1', 'param2', ...], ('param1','param2', ...)
-    update(table, params)       ===> ('table', ['param1' => 'value1', 'param2'=>'value2', ...])
-    delete(table, bool = false) ===> ('table') put true as second parameter for using without WHERE
-    where(params, bool = true)  ===> ('param1 = value, param2 <= value2'), (['param1 = value1', 'param2 <= value2'], bool) true is 'AND' as default, false is 'OR';
-    insert(table, params)       ===> ('table', ['param1' => 'value1', 'param2' => 'value2', ...])
-    group($fields)              ===> ('param1, param2, ...'), ('param1', 'param2', ...)
-    orderBy()                   ===> ('param1', 'param2', ...)
-    limit()                     ===> ('param1', 'param2')
-
-    execute(strict = false) if true executes in order as written in code - good for complex query;
-
-------------------------------------------------------------------------------------------------------------------------
-    EXAMPLE:
-
-    $query = new QueryBuilder($host, $user, $password, $database)
-
-    $query->select('id', 'param1', 'param2')
-                        ->where(['id < 5', 'param1 = 4'])
-                        ->from('table1')
-                        ->join('table2', 'id', 'id')
-                        ->groupBy('id')
-                        ->execute();
-    RESULT: ===> SELECT id, param1, param2 FROM table1 JOIN table2 ON table2.id = table1.id WHERE id < '5' AND param1 = '4' GROUP BY id
- ----------------------------------------------------------------------------------------------------------------------
- -->
-
 <?php
 
-class dbClass
+class dbClass implements ifDb
 {
     private $connection = false;
 
@@ -44,11 +15,21 @@ class dbClass
             $password, 
             $database
          );
+
+         $this->connection->query("SET NAMES 'utf8'");
     }
     public function query($sql)
     {
-        $result = $this->connection->query($sql);
-        if (empty($result)) {
+        $result = mysqli_query($this->connection, $sql);
+        echo $sql;
+        if(!is_bool($result)){
+            for($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
+            if(empty($data)){
+                $result = [];
+            }else{
+                $result = $data;
+            }
+        }else{
             $result = [];
         }
         return $result;
@@ -71,7 +52,7 @@ class dbClass
 
     public function insert(string $table, array $data, $returnId = false)
     {
-        $sql = 'INSERT INTO ' . $table;
+        $sql = 'INSERT INTO ' . $table. ' ';
         $insertSqlFields = [];
         $insertSqlValues = [];
         foreach ($data as $field => $value) {
