@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function ($name) {
-    include __DIR__ . DS . 'core/' . $name . '.php';
+    include __DIR__ . DS . 'core'.DS . $name . '.php';
 });
 
 class core
