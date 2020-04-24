@@ -18,10 +18,10 @@ class dbClass implements ifDb
 
          $this->connection->query("SET NAMES 'utf8'");
     }
-    public function query($sql)
+    public function query(string $sql) : array
     {
         $result = mysqli_query($this->connection, $sql);
-        echo $sql;
+        //echo $sql;
         if(!is_bool($result)){
             for($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
             if(empty($data)){
@@ -35,19 +35,18 @@ class dbClass implements ifDb
         return $result;
     }
     
-    public function escape($value)
+    public function escape(string $value) : string
     {
         return mysqli_escape_string($this->connection, $value);
     }
     
-    public function select(string $table, $fields = '*', $where = [])
+    public function select(string $table, $fields = '*', $where = []) : array
     {
         $sql = 'SELECT ';
         $sql .= is_array($fields) ? implode(',', $fields) : $fields;
         $sql .= ' FROM ' . $table;
         $sql .= $this->getWhere($where);
         return $this->query($sql);
-        //codeception
     }
 
     public function insert(string $table, array $data, $returnId = false)
@@ -72,12 +71,12 @@ class dbClass implements ifDb
         return $id;
     }
 
-    public function delete(string $table, $where = [])
+    public function delete(string $table, array $where = [])
     {
         return $this->query('DELETE FROM ' . $table . $this->getWhere($where));
     }
 
-    public function update(string $table, $data, $where = [])
+    public function update(string $table, array $data, array $where = [])
     {
         $sql = 'UPDATE ' . $table . ' SET ';
         
@@ -90,7 +89,7 @@ class dbClass implements ifDb
         return $this->query($sql);
     }
 
-    protected function getWhere($where = [])
+    protected function getWhere(array $where = [])
     {
         $sql = '';
         if (is_array($where) && !empty($where)) {

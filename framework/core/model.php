@@ -24,6 +24,15 @@ abstract class model
         }
     }
 
+    public function __get($name)
+    {
+        if(isset($this->tableSchema[$name])){
+            return $this->tableSchema[$name]['value'];
+        }else{
+            return $this->$name;
+        }
+    }
+
     protected function getTableSchema()
     {
         $schema = self::$db->select(
