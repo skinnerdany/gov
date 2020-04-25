@@ -37,11 +37,53 @@
                 box-shadow: 4px 4px 5px #999;
 
             }
+            .error_msg{
+                color: red;
+            }
+            table{
+                border-collapse: collapse;
+            }
+            th, td{
+                border-bottom: 1px solid black;
+                padding: .5em 1em;
+                text-align: center;
+            }
+            tr:nth-child(even){
+                background-color: #EBF4F6 
+            }
+            tr:nth-child(odd){
+                background-color: #DDE0E1;
+            }
+            #head_tr{
+                background-color: #fff;
+                border-top: 2px solid #000;
+                border-bottom: 2px solid #000;
+            }
+            tr:hover{
+                background-color: #F4ECDF;
+            }
+            .btn{
+                display: inline-block;
+                padding: .5em 1em;
+                border: 1px solid #ccc;
+                border-radius: 100px;
+                background-color: #8BFF7A;
+                color: black;
+                text-decoration: none;
+            }
+            .btn:hover{
+                opacity: .7;
+            }
+            .btn--del{
+                background-color: #FF7474;
+            }
         </style>
     </head>
     <body>
         Tax layout
-        <?php echo $error == '' ? '' : 'Ошибка: ' . $error; ?><br />
+        <?php echo $taxMenu ?? '' ?>
+        <?php echo $error == '' ? '' : '<p class="error_msg">Ошибка: ' . $error.'</p>'; ?>
+        <?php echo $message; ?>
         <?php echo $content; ?>
     </body>
 </html>

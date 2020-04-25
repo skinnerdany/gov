@@ -60,13 +60,13 @@ abstract class model
         $data = $this->getSaveData();
         $id = $data['id'];
         unset($data['id']);
-        self::$db->update($this->tableName, $data, ['id' => $id]);
+        return self::$db->update($this->tableName, $data, ['id' => $id]);
     }
 
     private function insert()
     {
         $data = $this->getSaveData();
-        self::$db->insert($this->tableName, $data);
+        return self::$db->insert($this->tableName, $data);
     }
     
     private function getSaveData()

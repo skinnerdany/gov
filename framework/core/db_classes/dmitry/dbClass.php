@@ -9,18 +9,20 @@ class dbClass implements ifDb
         foreach(Core::app()->db as $key => $value){
             $$key = $value;
         }
+        $port = $port ?? '3306';
         $this->connection = mysqli_connect(
             $host, 
             $user, 
             $password, 
-            $database
+            $database,
+            $port
          );
 
-         $this->connection->query("SET NAMES 'utf8'");
+         mysqli_query($this->connection, "SET NAMES 'utf8'");
     }
     public function query(string $sql) : array
     {
-        $result = mysqli_query($this->connection, $sql);
+        $result = mysqli_query($this->connection, $sql) or mysqli_error($this->connection);
         //echo $sql;
         if(!is_bool($result)){
             for($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
@@ -29,8 +31,10 @@ class dbClass implements ifDb
             }else{
                 $result = $data;
             }
-        }else{
-            $result = [];
+        }
+
+        if(is_bool($result)){
+           $result = $result === true ? ['true'] : ['false'];
         }
         return $result;
     }
@@ -59,16 +63,13 @@ class dbClass implements ifDb
             $insertSqlValues[] = "'" . $this->escape($value) . "'";
         }
         $sql .= '(' . implode(',', $insertSqlFields) . ') VALUES (' .implode(',', $insertSqlValues) . ')';
-        if ($returnId) {
-            $sql .= ' RETURNING id';
-        }
-        $id = 0;
         $res = $this->query($sql);
-        if (!empty($res)) {
-            $id = $res[0]['id'];
+
+        if($res[0] == 'true' && $returnId){
+            $res = $this->select($table, 'id', ['id' => 'LAST_INSERT_ID']);
         }
         
-        return $id;
+        return $res;
     }
 
     public function delete(string $table, array $where = [])
