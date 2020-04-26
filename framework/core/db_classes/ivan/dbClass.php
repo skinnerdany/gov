@@ -15,10 +15,10 @@ class dbClass implements ifDb
             );
         }
 
-        $res = mysqli_query($this->connection, "INSERT INTO gibdd (passport) VALUE ('avsbsbsbs')");
+ /*        $res = mysqli_query($this->connection, "INSERT INTO gibdd (passport) VALUE ('avsbsbsbs')");
         var_dump($res);
         print_r(mysqli_error($this->connection));
-        die(); 
+        die();  */
 
     }
 
