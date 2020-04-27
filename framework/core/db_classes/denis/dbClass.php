@@ -18,8 +18,14 @@ class dbClass implements ifDb
     public function query(string $sql) : array
     {
         $result = $this->connection->query($sql);
-        if (empty($result)) {
+        $data = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $data[] = $row; 
+        }
+        if (empty($data)) {
             $result = [];
+        }else {
+            $result = $data;
         }
         return $result;
     }
