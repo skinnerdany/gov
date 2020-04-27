@@ -6,6 +6,13 @@
         protected $error = '';
         protected $message = '';
 
+        public function actionTest()
+        {
+            $model = $this->getModel('people_tax');
+
+            $model->add(['passport' => 4508, 'inn' => 7700018]);
+        }
+
         public function actionAdd()
         {
             echo $this->renderLayout([
