@@ -7,9 +7,37 @@ h1{
     font-size: 1.5rem;
     text-align: center;
     margin-top: 2rem;
+    color:red;
 }
 .addform{
     width:70%;
     
     margin: 2rem auto;
+}
+
+.addInfo{
+    margin:2.5rem auto 0 auto;
+    width: 70%;
+    color:blue;
+    background-color: aqua;
+}
+.addInfoError{
+    margin:2.5rem auto 0 auto;
+    width: 70%;
+    color:red;
+    background-color: aqua;
+}
+.example{
+    font-size: 0.8em;
+    color:grey
+}
+
+.menu{
+
+    width: 70%;
+    margin:20px auto 0 auto;
+}
+.table{
+    width: 70%;
+    margin: 1.5rem auto 0 auto;
 }

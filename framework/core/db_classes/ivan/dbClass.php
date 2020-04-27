@@ -26,22 +26,20 @@ class dbClass implements ifDb
 
         $data =[];
         $result = mysqli_query($this->connection, $sql);
-        var_dump( $result);
+        //var_dump( $result);
         if($result === true){
-            $data[] = true;
+            $data['result'] = true;
         }
-        else if($result === false){
+        if($result === false){
             echo mysqli_error($this->connection);
-             $data[] = false;
-        } else{
-            while($row = mysqli_fetch_array($result , MYSQLI_ASSOC)){
-                $data[] = $row; 
+             $data['result'] = mysqli_errno($this->connection);
+             
         }
-/*         if( $result instanceof mysqli_result ){
+        if( $result instanceof mysqli_result ){
 
             while($row = mysqli_fetch_array($result , MYSQLI_ASSOC)){
                 $data[] = $row;
-            } */
+            } 
         } 
             return $data;       
     }
@@ -83,8 +81,9 @@ class dbClass implements ifDb
             $id = mysqli_insert_id($this->connection);
         } */
         //echo $id;
+
         
-        return $res[0];
+        return $res['result'];
     }
 
     public function delete(string $table, array $where = [])
