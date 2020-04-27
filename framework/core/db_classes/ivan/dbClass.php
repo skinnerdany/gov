@@ -22,7 +22,6 @@ class dbClass implements ifDb
 
     }
 
-
     public function query(string $sql) : array {
 
         $data =[];

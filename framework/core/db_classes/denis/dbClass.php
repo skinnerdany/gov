@@ -2,19 +2,17 @@
 
 class dbClass implements ifDb
 {
-    private $connection = null;
-    private $host;
-    private $user;
-    private $password;
-    private $db;
+    private $connection = false;
 
-    public function __construct($host, $user, $password, $db)
+    public function __construct()
     {
-        $this->connection = new mysqli($this->host, $this->user, $this->password, $this->db);
+        foreach(core::app()->db as $key => $value){
+            $$key = $value;
+        }
+        $this->connection = new mysqli($host, $user, $password, $db, $port);
         if($this->connection->connect_error){
             echo $this->connection->connect_error;
         }
-
     }
 
     public function query(string $sql) : array
