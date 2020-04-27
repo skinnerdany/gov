@@ -10,7 +10,13 @@
         {
             $model = $this->getModel('people_tax');
 
-            $model->add(['passport' => 4508, 'inn' => 7700018]);
+            try{
+                $model->add(['passport' => 4508, 'inn' => 770001]);
+            }catch(Exception $e){
+                echo $e->getMessage();
+            }
+
+
         }
 
         public function actionAdd()
@@ -107,5 +113,10 @@
                 'message' => $this->renderTemplate('isCompleteMessage', ['message' => $this->message]),
                 'content' => $this->renderTemplate('update')
             ]);
+        }
+
+        public function actionPeopletax()
+        {
+
         }
     }

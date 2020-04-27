@@ -4,9 +4,8 @@
     {
         public function add(array $data)
         {
-            $this->passport = $this->checkPassport($data['passport']);
-            $this->id       = $this->getTaxId($data['inn']);
-            
+            $this->passport = $this->checkPassport($data['passport'])['passport'];
+            $this->tax_id   = $this->getTaxId($data['inn'])['id'];
             if($this->checkData()){
                 $this->save();
             }
@@ -26,7 +25,7 @@
             $result = self::$db->select('tax', 'id', ['inn' => $inn]);
             $result = reset($result);
             if($result === false){
-                 $result = [];
+                $result = [];
             }
             return $result;
         }
@@ -46,7 +45,7 @@
             if(!$this->passport){
                 throw new Exception('Номер паспорта не верен');
             }
-            if(!$this->id){
+            if(!$this->tax_id){
                 throw new Exception('ИНН не верен');
             }
 

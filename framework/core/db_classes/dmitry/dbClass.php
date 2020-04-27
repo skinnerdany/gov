@@ -44,7 +44,7 @@ class dbClass implements ifDb
         return mysqli_escape_string($this->connection, $value);
     }
     
-    public function select(string $table, $fields = '*', $where = []) : array
+    public function select(string $table, $fields = '*', array $where = []) : array
     {
         $sql = 'SELECT ';
         $sql .= is_array($fields) ? implode(',', $fields) : $fields;
