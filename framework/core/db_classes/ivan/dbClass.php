@@ -5,15 +5,21 @@ class dbClass implements ifDb
 
     public $connection = false;
     public function __construct(){
-        
+   
         if($this->connection === false){
             $this->connection = mysqli_connect(
                 core::app()->db['host'],
                 core::app()->db['user'],
                 core::app()->db['password'],
-                core::app()->db['database'],
+                core::app()->db['database']
             );
         }
+
+        $res = mysqli_query($this->connection, "INSERT INTO gibdd (passport) VALUE ('avsbsbsbs')");
+        var_dump($res);
+        print_r(mysqli_error($this->connection));
+        die(); 
+
     }
 
 
@@ -21,15 +27,23 @@ class dbClass implements ifDb
 
         $data =[];
         $result = mysqli_query($this->connection, $sql);
-        
-        if($result === false){
-             mysqli_error($this->connection);
-        } else if( $result instanceof mysqli_result ){
+        var_dump( $result);
+        if($result === true){
+            $data[] = true;
+        }
+        else if($result === false){
+            echo mysqli_error($this->connection);
+             $data[] = false;
+        } else{
+            while($row = mysqli_fetch_array($result , MYSQLI_ASSOC)){
+                $data[] = $row; 
+        }
+/*         if( $result instanceof mysqli_result ){
 
             while($row = mysqli_fetch_array($result , MYSQLI_ASSOC)){
                 $data[] = $row;
-            }
-        }
+            } */
+        } 
             return $data;       
     }
 
@@ -66,11 +80,12 @@ class dbClass implements ifDb
         $res = $this->query($sql);
     
         //print_r($res);
-        if (empty($res) ) {
+       /*  if (empty($res) ) {
             $id = mysqli_insert_id($this->connection);
-        }
+        } */
         //echo $id;
-        return $id;
+        
+        return $res[0];
     }
 
     public function delete(string $table, array $where = [])
