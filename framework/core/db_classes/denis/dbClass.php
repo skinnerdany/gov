@@ -2,19 +2,17 @@
 
 class dbClass implements ifDb
 {
-    private $connection = null;
-    private $host;
-    private $user;
-    private $password;
-    private $db;
+    private $connection = false;
 
-    public function __construct($host, $user, $password, $db)
+    public function __construct()
     {
-        $this->connection = new mysqli($this->host, $this->user, $this->password, $this->db);
+        foreach(core::app()->db as $key => $value){
+            $$key = $value;
+        }
+        $this->connection = new mysqli($host, $user, $password, $db, $port);
         if($this->connection->connect_error){
             echo $this->connection->connect_error;
         }
-
     }
 
     public function query(string $sql) : array
@@ -50,16 +48,13 @@ class dbClass implements ifDb
             $insertSqlValues[] = "'" . $this->escape($value) . "'";
         }
         $sql .= '(' . implode(',', $insertSqlFields) . ') VALUES (' .implode(',', $insertSqlValues) . ')';
-        if ($returnId) {
-            $sql .= ' RETURNING id';
-        }
-        $id = 0;
-        $res = $this->query($sql);
-        if (!empty($res)) {
-            $id = $res[0]['id'];
+        $result = $this->query($sql);
+
+        if($result[0] == 'true' && $returnId){
+            $res = $this->select($table, 'id', ['id' => 'LAST_INSERT_ID']);
         }
         
-        return $id;
+        return $result;
     }
 
     public function delete(string $table, array $where = [])
