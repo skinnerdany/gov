@@ -38,7 +38,7 @@ class dbClass implements ifDb
         return $this->query($sql);
     }
 
-    public function insert(string $table, array $data)
+    public function insert(string $table, array $data, $returnId = false)
     {
         $sql = 'INSERT INTO ' . $table;
         $insertSqlFields = [];
@@ -48,7 +48,13 @@ class dbClass implements ifDb
             $insertSqlValues[] = "'" . $this->escape($value) . "'";
         }
         $sql .= '(' . implode(',', $insertSqlFields) . ') VALUES (' .implode(',', $insertSqlValues) . ')';
-        return $this->query($sql);
+        $result = $this->query($sql);
+
+        if($result[0] == 'true' && $returnId){
+            $res = $this->select($table, 'id', ['id' => 'LAST_INSERT_ID']);
+        }
+        
+        return $result;
     }
 
     public function delete(string $table, array $where = [])
