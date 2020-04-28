@@ -7,10 +7,9 @@ class controllerGibdd extends controller{
         $data =  null;
         $error = false;
     
-        $dataCar =core::app()->input->post ??  null ;
         if (core::app()->input->form) {
             try {
-                $result = $this->getModel('gibdd')->add($dataCar);
+                $result = $this->getModel('gibdd')->add(core::app()->input->post);
             } catch (Exception $e) {
                 $result = $e->getMessage();
                 $error = true;
@@ -22,6 +21,11 @@ class controllerGibdd extends controller{
         if(isset(core::app()->input->get['number'])){
            $data =  $this->getModel('gibdd')->check(core::app()->input->get['number']);
         }
+
+  
+         echo(core::app()->input->post['edit']);
+        
+
       
           
         
@@ -36,6 +40,11 @@ class controllerGibdd extends controller{
         $data['records'] = $this->getModel('gibdd')->show();
         $content = $this->renderTemplate('show',$data);
         echo $this->renderLayout(['content' => $content]);
+    }
+
+
+    public function actionEdit(){
+        echo "Edit";
     }
 
 }

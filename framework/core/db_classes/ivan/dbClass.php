@@ -101,7 +101,8 @@ class dbClass implements ifDb
         }
         $sql .= implode(',', $updateData);
         $sql .= $this->getWhere($where);
-        return $this->query($sql);
+        $res = $this->query($sql);
+        return $res['result'] ;
     }
 
 

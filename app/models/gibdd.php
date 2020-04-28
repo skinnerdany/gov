@@ -6,11 +6,11 @@ class gibdd extends model {
 
 public function add(array $data=[])
 {
-    
+    //echo $data['edit'];
     $number_auto = mb_strtolower($data['number']);
     
 
-    if(!empty($data['passport']) && !empty($data['number']) ){
+    if(!empty($data['passport']) && !empty($data['number'])){
         if(!preg_match ('#^-?[0-9]*$#',$data['passport'])){
             throw new Exception("Запись не добавлена. Неверный формат паспорта", 1);      
         }
@@ -24,16 +24,30 @@ public function add(array $data=[])
          }
 
          $checkExistRecord =self::$db->select('gibdd','*',['number'=> $number_auto]);
-         if(!empty($checkExistRecord)){
-            throw new Exception("Запись не добавлена.Такой номер т.с. есть в базе", 1);
+        
+         if(!empty($data['edit'])){
+
+                    if(!empty($checkExistRecord)&& $data['edit'] !== $number_auto ){
+                        throw new Exception("У этого т.с. уже есть владелец", 1);
+                    }else{
+                        $result = self::$db->update('gibdd',
+                        ['passport'=>(int)$data['passport'], 'number'=> $number_auto],
+                        ['number'=>$data['edit']]);  
+                    }
+        }else{
+            
+            if(!empty($checkExistRecord)){
+               throw new Exception("Запись не добавлена.Такой номер т.с. есть в базе", 1);
+            }
+            $result = self::$db->insert('gibdd', ['passport'=>(int) $data['passport'], 'number' => $number_auto]);
          }
 
    
-        $result = self::$db->insert('gibdd', ['passport'=>(int) $data['passport'], 'number' => $number_auto]);
+        
       
        if($result === true){
-        $dataAdd = 'Запись добавлена';
-        header("refresh: 5; url=?controller=gibdd&action=add");
+        $dataAdd = !empty($data['edit'])?'Запись изменена':'Запись добавлена';
+       header("refresh: 5; url=?controller=gibdd&action=add");
        }else {
         throw new Exception("Запись не добавлена. Другой тип ошибки", 1); 
        }

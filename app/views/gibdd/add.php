@@ -1,3 +1,9 @@
+<?php
+ $hidden = isset($data["changeSubmit"])?$data['number']:''; 
+  echo 'скрытое поле - ' . $hidden;
+?>
+
+
 
 <form action=""  method="post" class="addform">
 <div class="form-row ">
@@ -18,12 +24,13 @@
         >
         <span class="example">Пример: О111ХК777</span>
         </div>
-    
+        <input type="hidden" name="edit" value=<?php echo $hidden ?>>
 </div>
-<input class="btn btn-primary float-right" type="submit" value="Добавить" name="go">
-<!-- <input type="text" placeholder="Введите cерия, номер паспорта" name="passport">
-<input type="text" placeholder="Введите номер т/c" name="numer_auto">
-<input type="submit" name="go" value="Добавить"> -->
+<?php $value =  isset($data["changeSubmit"])? 'value="Редактировать"':'value="Добавить"'?>
+<input class="btn btn-primary float-right"
+ type="submit"
+  <?php echo $value ?> name="go">
+
 </form>
 <?php $style = $error? 'addInfoError': 'addInfo' ?>
 <div class="text-center <?php echo $style ?> "><?php echo $result ?? null ?></div>
