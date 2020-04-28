@@ -12,7 +12,7 @@ abstract class model
             self::$db = new db();
         }
         /* $this->tableName = get_class($this);
-        $this->tableSchema = $this->getTableSchema(); */
+        $this->tableSchema = $this->getTableSchema();  */
     }
     
     public function __set($name, $value)

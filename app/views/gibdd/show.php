@@ -1,11 +1,3 @@
-<?php
-//print_r($records);
-foreach ($records as $record) {
- /*    echo $record['passport'] . "  ". $record['number'];
-    echo "<hr>"; */
-
-}
-?>
 
 <table class="table">
 
@@ -25,7 +17,7 @@ if (!empty($records)){
         echo '<th scope="row">'.++$index.'</th>';
         echo '<td>'.$record['passport'].'</td>';
         echo '<td>'.$record['number'].'</td>';
-        echo '<td><a href="index.php?controller=gibdd&action=add&number_auto='.$record['number'].'">Редактировать</a><br> Удалить</td>';
+        echo '<td><a href="index.php?controller=gibdd&action=add&number='.$record['number'].'">Редактировать</a><br> Удалить</td>';
         echo '</tr>';
     }
 }else {

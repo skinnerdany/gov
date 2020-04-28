@@ -12,9 +12,9 @@
         </div>
         <div class="form-group col-md-6">
         <label for="inputPassword4">Государственный регистрационный номер т/c</label>
-        <input type="text" class="form-control" id="inputPassword4" name="number_auto"
+        <input type="text" class="form-control" id="inputPassword4" name="number"
         placeholder="Введите данные"
-        value=<?php echo  htmlspecialchars($data['number_auto']) ?? null ?>
+        value=<?php echo $data['number'] ?? null ?>
         >
         <span class="example">Пример: О111ХК777</span>
         </div>

@@ -7,14 +7,10 @@ class gibdd extends model {
 public function add(array $data=[])
 {
     
-    $number_auto = mb_strtolower($data['number_auto']);
+    $number_auto = mb_strtolower($data['number']);
     
-  /*   if(isset(core::app()->input->get['number_auto'])){
-       $str =  self::$db->select('gibdd','*',['number'=> $number_auto]);
-       var_dump($str);
-    } 
-    */
-    if(!empty($data['passport']) && !empty($data['number_auto']) ){
+
+    if(!empty($data['passport']) && !empty($data['number']) ){
         if(!preg_match ('#^-?[0-9]*$#',$data['passport'])){
             throw new Exception("Запись не добавлена. Неверный формат паспорта", 1);      
         }
@@ -55,6 +51,14 @@ public function show(){
 
     $data = self::$db->select('gibdd');
     return $data;
+}
+
+public function check($value){
+    $result =self::$db->select('gibdd','*',['number'=> $value]);
+    if(!empty($result)){
+        $result[0]["changeSubmit"] =true;
+        return $result[0];
+    }    
 }
 
 

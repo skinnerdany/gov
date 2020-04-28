@@ -4,8 +4,9 @@ class controllerGibdd extends controller{
     protected $layoutFile = 'ivan';
     public function actionAdd(){
         $result ='';
-        $data =  core::app()->input->get ?? null;
+        $data =  null;
         $error = false;
+    
         $dataCar =core::app()->input->post ??  null ;
         if (core::app()->input->form) {
             try {
@@ -16,6 +17,10 @@ class controllerGibdd extends controller{
                 $data = core::app()->input->post;
             }
           
+        }
+
+        if(isset(core::app()->input->get['number'])){
+           $data =  $this->getModel('gibdd')->check(core::app()->input->get['number']);
         }
       
           
