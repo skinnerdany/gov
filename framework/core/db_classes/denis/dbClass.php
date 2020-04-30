@@ -18,16 +18,18 @@ class dbClass implements ifDb
     public function query(string $sql) : array
     {
         $result = $this->connection->query($sql);
-        $data = [];
-        while($row = mysqli_fetch_assoc($result)){
-            $data[] = $row; 
+        if(!is_bool($result)){
+            for($data=[]; $row = mysqli_fetch_assoc($result); $data[] = $row);
+            if(empty($data)){
+                $result = [];
+            }else {
+                $result = $data;
+            }
         }
-        if (empty($data)) {
-            $result = [];
-        }else {
-            $result = $data;
-        }
-        return $result;
+        if(is_bool($result)){
+            $result = $result === true ? ['true'] : ['false'];
+         }
+         return $result;
     }
 
     public function escape(string $value) : string
