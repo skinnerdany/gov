@@ -9,5 +9,8 @@
         <li class="tax_menu__item">
             <a href="/tax/okved">Добавить/изменить ОКВЕД</a>
         </li>
+        <li class="tax_menu__item">
+            <a href="/tax/peopletaxform">Привязать человека к работе</a>
+        </li>
     </ul>
 </div>

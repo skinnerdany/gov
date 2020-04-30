@@ -2,10 +2,13 @@
 
     class people_tax extends model
     {
+        protected $additionalInfo = '';
+
         public function add(array $data)
         {
-            $this->passport = $this->checkPassport($data['passport'])['passport'];
-            $this->tax_id   = $this->getTaxId($data['inn'])['id'];
+            $this->passport = $this->getPassport($data['passport']);
+            $this->tax_id   = $this->getTaxId($data['inn']);
+
             if($this->checkData()){
                 $this->save();
             }
@@ -20,24 +23,40 @@
             return reset($result);
         }
 
-        protected function getTaxId($inn)
+        protected function getTaxId($org)
         {
-            $result = self::$db->select('tax', 'id', ['inn' => $inn]);
+            if(is_numeric($org)){
+                $result = self::$db->select('tax', 'id', ['inn' => $org]);
+            }else{
+                $result = self::$db->select('tax', 'id', ['organization_name' => $org]);
+            }
             $result = reset($result);
             if($result === false){
-                $result = [];
+                return false;
             }
-            return $result;
+            return $result['id'];
         }
 
         protected function checkPassport($passport)
         {
+            $result = self::$db->select($this->tableName, '*', ['passport' => $passport]);
+            $result = reset($result);
+            if($result){
+                $orgInfo = self::$db->select('tax', '*', ['id' => $result['tax_id']]);
+                $orgInfo = reset($orgInfo);
+                $this->additionalInfo = 'ИНН => '.$orgInfo['inn']. ' Название => '.$orgInfo['organization_name'];
+            }
+            return $result;
+        }
+
+        protected function getPassport($passport)
+        {
             $result = self::$db->select('mfc', 'passport', ['passport' => $passport]);
             $result = reset($result);
             if($result === false){
-                $result = [];
+                return false;
            }
-           return $result;
+           return $result['passport'];
         }
 
         protected function checkData()
@@ -46,7 +65,10 @@
                 throw new Exception('Номер паспорта не верен');
             }
             if(!$this->tax_id){
-                throw new Exception('ИНН не верен');
+                throw new Exception('ИНН или название фирмы введено не верно');
+            }
+            if($this->checkPassport($this->passport)){
+                throw new Exception('Товарищ уже зарегистрирован на работе -> '.$this->additionalInfo);
             }
 
             return true;

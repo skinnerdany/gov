@@ -11,8 +11,8 @@ abstract class model
         if (self::$db === false) {
             self::$db = new db();
         }
-        /* $this->tableName = get_class($this);
-        $this->tableSchema = $this->getTableSchema(); */
+        $this->tableName = get_class($this);
+        $this->tableSchema = $this->getTableSchema();
     }
     
     public function __set($name, $value)

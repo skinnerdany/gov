@@ -115,8 +115,30 @@
             ]);
         }
 
-        public function actionPeopletax()
+        public function actionPeopletaxform()
         {
-
+            echo $this->renderLayout([
+                'taxMenu' => $this->renderTemplate('taxMenu'),
+                'error' => $this->error,
+                'message' => $this->renderTemplate('isCompleteMessage', ['message' => $this->message]),
+                'content' => $this->renderTemplate('peopleTaxForm')
+            ]);
         }
+
+        public function actionPeopletaxadd()
+        {
+            $peopleTax = $this->getModel('people_tax');
+            $data = core::app()->input->get ?? core::app()->input->post ?? [];
+            try{
+                $peopleTax->add($data);
+                $this->message = 'База данных обновлена';
+            }catch(Exception $e){
+                $this->message = 'Отмена операции';
+                $this->error = $e->getMessage();
+            }
+
+            $this->actionPeopletaxform();
+        }
+
+        
     }
