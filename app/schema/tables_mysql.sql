@@ -1,5 +1,5 @@
-CREATE SCHEMA mfc;
-
+-- CREATE SCHEMA mfc;
+-- insert into mfc (passport, name, second_name, birth_date, sex, email, phone) VALUES (1122333444, 'vasya', 'pupkin', '2019-12-12 00:00:00', 0 , 'test@test.ru', '9001234567');
 CREATE TABLE mfc
 (
 	passport	integer		NOT NULL PRIMARY KEY,
@@ -10,7 +10,9 @@ CREATE TABLE mfc
 	social_card	integer		NOT NULL DEFAULT 0,
 	email		varchar(1024)	NOT NULL DEFAULT '',
 	phone		varchar(10)	NOT NULL DEFAULT ''
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE tax
 (
@@ -18,25 +20,34 @@ CREATE TABLE tax
 	organization_name	varchar(1024)	NOT NULL DEFAULT '',
 	inn			integer		NOT NULL DEFAULT 0,
 	okved_id		integer		NOT NULL DEFAULT 0
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 CREATE TABLE okved
 (
 	id			serial		NOT NULL PRIMARY KEY,
 	name			varchar(1024)	NOT NULL DEFAULT '',
 	always			smallint	NOT NULL DEFAULT 0
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE people_tax
 (
 	passport	integer		NOT NULL DEFAULT 0,
 	tax_id		integer		NOT NULL DEFAULT 0
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE gibdd
 (
-	nunmber		varchar(9)	NOT NULL DEFAULT '',
+	number		varchar(18)	NOT NULL DEFAULT '',
 	passport	integer		NOT NULL DEFAULT 0
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE social_transport
 (
@@ -45,7 +56,9 @@ CREATE TABLE social_transport
 	passport	integer		NOT NULL DEFAULT 0,
 	`lock`		smallint 	NOT NULL DEFAULT 0,
 	unlock_expire	integer		NOT NULL DEFAULT 0
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE pass
 (
@@ -66,5 +79,7 @@ CREATE TABLE pass
 	car_number		varchar(9)	NOT NULL DEFAULT '',
 	social_card		integer		NOT NULL DEFAULT 0,
 	troika			integer		NOT NULL DEFAULT 0
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
