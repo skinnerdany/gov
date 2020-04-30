@@ -6,6 +6,7 @@
         </noscript>
         <meta http-equiv="content-type" content="text\html;charset=utf-8" />
         <!-- <script src="/js/jquery.js"></script> -->
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="./css/ivan/style.css" >
     </head>
@@ -26,7 +27,7 @@
                 <a class="nav-link active" href="index.php?controller=gibdd&action=show">Посмотреть</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Поиск</a>
+                <a class="nav-link" href="index.php?controller=gibdd&action=search">Поиск</a>
             </li> 
             </ul>
         </div>
