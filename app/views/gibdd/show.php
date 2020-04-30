@@ -17,7 +17,10 @@ if (!empty($records)){
         echo '<th scope="row">'.++$index.'</th>';
         echo '<td>'.$record['passport'].'</td>';
         echo '<td>'.$record['number'].'</td>';
-        echo '<td><a href="index.php?controller=gibdd&action=add&number='.$record['number'].'">Редактировать</a><br> Удалить</td>';
+        echo '<td><a href="index.php?controller=gibdd&action=add&number='.$record['number'].'">Редактировать</a>
+          <br> 
+          <a href="index.php?controller=gibdd&action=delete&number='.$record['number'].'">Удалить</a>
+          </td>';
         echo '</tr>';
     }
 }else {
@@ -26,8 +29,24 @@ if (!empty($records)){
     echo '</tr>';
 
 }
-    
 
 ?>
   </tbody>
 </table>
+<?php
+
+if($search_lable){
+  
+       
+ echo 
+'<div class="container main">
+  <div class="row">
+    <div class="col-12 text-center">
+      <a href="index.php?controller=gibdd&action=search">Вернуться к поиску</a>
+    </div>
+  </div>
+</div>';
+  }
+
+?>
+
