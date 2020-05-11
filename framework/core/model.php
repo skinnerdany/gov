@@ -17,7 +17,7 @@ abstract class model
     
     public function __set($name, $value)
     {
-        if ($this->tableSchema[$name]) {
+        if (isset($this->tableSchema[$name])) {
             $this->tableSchema[$name]['value'] = $value;
         } else {
             $this->$name = $value;

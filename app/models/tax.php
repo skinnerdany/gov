@@ -40,6 +40,15 @@
             );
         }
 
+        public function getOrganization($inn){
+            return self::$db->query(
+                            "SELECT t.id, organization_name, inn, name AS okved, always 
+                            FROM tax AS t
+                            JOIN okved AS o ON t.okved_id = o.id
+                            WHERE inn = '$inn'"
+                        );
+        }
+
         public function update($data)
         {
             $this->validateData($data);

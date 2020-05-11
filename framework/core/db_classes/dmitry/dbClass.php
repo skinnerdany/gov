@@ -22,8 +22,8 @@ class dbClass implements ifDb
     }
     public function query(string $sql) : array
     {
-        $result = mysqli_query($this->connection, $sql) or mysqli_error($this->connection);
-        //echo $sql;
+        $result = mysqli_query($this->connection, $sql);// or die(mysqli_error($this->connection));
+        //echo $sql.'<br>';
         if(!is_bool($result)){
             for($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
             if(empty($data)){
@@ -34,7 +34,7 @@ class dbClass implements ifDb
         }
 
         if(is_bool($result)){
-           $result = $result === true ? ['true'] : ['false'];
+           $result = $result === true ? [true] : [false];
         }
         return $result;
     }
@@ -62,10 +62,11 @@ class dbClass implements ifDb
             $insertSqlFields[] = $field;
             $insertSqlValues[] = "'" . $this->escape($value) . "'";
         }
+
         $sql .= '(' . implode(',', $insertSqlFields) . ') VALUES (' .implode(',', $insertSqlValues) . ')';
         $res = $this->query($sql);
 
-        if($res[0] == 'true' && $returnId){
+        if($returnId  && $res[0] == true ){
             $res = $this->select($table, 'id', ['id' => 'LAST_INSERT_ID']);
         }
         

@@ -24,7 +24,7 @@ public function add(array $data=[], $edit )
             throw new Exception("Запись не добавлена. Неверный формат номера т.с.", 1);      
          }
 
-         $checkExistRecord =self::$db->select('gibdd','*',['number'=> $number_auto]);
+         $checkExistRecord = self::$db->select('gibdd','*',['number'=> $number_auto]);
          
 
         if(isset($edit)){
