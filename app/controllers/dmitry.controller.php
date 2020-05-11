@@ -49,11 +49,15 @@
             $this->layoutFile = 'dmitryPassLayout';
             try{
                 if(core::app()->input->form){
-                    $model->buildPass(core::app()->input->post);
+                    $res = $model->buildPass(core::app()->input->post);
                 }
             }catch(Exception $e){
                 $this->error = $e->getMessage();
                 $this->actionGetpass();
+            }
+
+            if($res){
+                header('Location: /?go=1&controller=dmitry&action=showpass&pass_id='.$res);
             }
 
         }

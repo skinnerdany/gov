@@ -19,6 +19,7 @@
   
 if(count($data) != 0){
 
+    $number         = $data['pass_id'];
     $name           = $data['name'];
     $second_name    = $data['second_name'];
     $phone          = $data['phone'];
@@ -30,6 +31,7 @@ if(count($data) != 0){
 
 ?>
 
+    <p>Номер пропуска: <?php echo $number?></p>
     <p>Имя: <?php echo $name?></p>
     <p>Фамилия: <?php echo $second_name?></p>
     <p>Телефон: <?php echo $phone?></p>

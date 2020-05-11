@@ -85,7 +85,7 @@
             
             //var_dump($this->tableSchema);
             if($this->organization['always'] == 1){
-                $this->generatePass();
+                return $this->generatePass();
             }else{
                 throw new Exception('Деятельность Вашей организации приостановлена.');
             }
@@ -111,6 +111,8 @@
             }
             
             $this->save();
+
+            return $this->pass_id;
         }
 
         private function getPassId()

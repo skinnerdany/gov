@@ -44,7 +44,7 @@
 ?>
 <body>
     <?php echo $menu?>
-    <form action="/dmitry/buildpass" method="POST">
+    <form action="/?controller=dmitry&action=buildpass" method="POST">
         <fieldset>
             <legend>Данные пользователя</legend>
             <div class="input_block">

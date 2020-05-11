@@ -24,8 +24,8 @@
                     <td><?php echo $org['inn']?></td>
                     <td><?php echo $org['okved']?></td>
                     <td><?php echo $org['always'] == '1' ? 'да' : 'нет' ?></td>
-                    <td><?php echo "<a class=\"btn\" href=\"/tax/update?id={$org['id']}&organization={$org['organization_name']}&inn={$org['inn']}&org_okved={$org['okved']}\">Редактировать</a>" ?></td>
-                    <td><?php echo "<a class=\"btn btn--del\" href=\"/tax/delete?id={$org['id']}\">Удалить</a>" ?></td>
+                    <td><?php echo "<a class=\"btn\" href=\"/?controller=tax&action=update&id={$org['id']}&organization={$org['organization_name']}&inn={$org['inn']}&org_okved={$org['okved']}\">Редактировать</a>" ?></td>
+                    <td><?php echo "<a class=\"btn btn--del\" href=\"/?controller=tax&action=delete&id={$org['id']}\">Удалить</a>" ?></td>
                 </tr>
         
             <?php } ?>

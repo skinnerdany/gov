@@ -24,8 +24,8 @@ natalya
     'error_action' => 'notfound',
     'controller_request_param' => 'controller',
     'action_request_param' => 'action',
-    'default_controller' => 'catalog',
-    'default_action' => 'list',
+    'default_controller' => 'default',
+    'default_action' => 'default',
     'layout_dir' => $appPath . 'views' . DS . 'layouts' . DS,
     'db' => include __DIR__ . DS . 'db.php'
 ];

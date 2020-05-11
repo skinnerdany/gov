@@ -1,22 +1,22 @@
 <div class="tax_menu">
     <ul>
         <li class="tax_menu__item">
-            <a href="/tax/organizationlist">Список организаций</a>
+            <a href="/?controller=tax&action=organizationlist">Список организаций</a>
         </li>
         <li class="tax_menu__item">
-            <a href="/tax/add">Добавить организацию</a>
+            <a href="/?controller=tax&action=add">Добавить организацию</a>
         </li>
         <li class="tax_menu__item">
-            <a href="/tax/okved">Добавить/изменить ОКВЕД</a>
+            <a href="/?controller=tax&action=okved">Добавить/изменить ОКВЕД</a>
         </li>
         <li class="tax_menu__item">
-            <a href="/tax/peopletaxform">Привязать человека к работе</a>
+            <a href="/?controller=tax&action=peopletaxform">Привязать человека к работе</a>
         </li>
         <li class="tax_menu__item">
-            <a href="/dmitry/getpass">Получить пропуск</a>
+            <a href="/?controller=dmitry&action=getpass">Получить пропуск</a>
         </li>
         <li class="tax_menu__item">
-            <a href="/dmitry/showpass">Проверить пропуск</a>
+            <a href="/?controller=dmitry&action=showpass">Проверить пропуск</a>
         </li>
     </ul>
 </div>

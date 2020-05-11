@@ -11,6 +11,7 @@
         <?php echo $error == '' ? '' : 'Ошибка: ' . $error; ?><br />
         <?php echo $modal; ?><br />
         <?php echo $content; ?>
+        <a href="/?controller=dmitry&action=getpass">Получить пропуск от Дмитрия :)</a>
         <br />
         <hr />
         <hr />

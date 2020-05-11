@@ -5,7 +5,7 @@
     }
 
 ?>
-<form action="/tax/update" method="GET">
+<form action="/?controller=tax&action=update" method="GET">
     <fieldset>
         <legend>Редактировать организацию</legend>
         <input type="hidden" name="id" value="<?php echo $id ?? '' ?>" > 

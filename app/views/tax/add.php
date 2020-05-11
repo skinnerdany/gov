@@ -8,7 +8,7 @@
     }
 ?>
 
-<form action="/tax/addOrganization" method="GET">
+<form action="/?controller=tax&action=addOrganization" method="GET">
     <fieldset>
         <legend>Добавить организацию</legend>
         <div class="input_block">

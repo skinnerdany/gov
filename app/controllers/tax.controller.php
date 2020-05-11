@@ -43,19 +43,6 @@
             $this->actionAdd();
         }
 
-        public function actionAddOkved()
-        {
-            $okved = $this->getModel('okved');
-            $data = core::app()->input->get ?? core::app()->input->post ?? [];
-            try{
-                $this->message = $okved->add($data);
-            }catch(Exception $e){
-                $this->message = 'Отмена операции';
-                $this->error = $e->getMessage();
-            }
-
-            $this->actionOkved();
-        }
 
         public function actionOrganizationlist()
         {
@@ -76,15 +63,7 @@
 
         }
 
-        public function actionOkved()
-        {
-            echo $this->renderLayout([
-                'taxMenu' => $this->renderTemplate('taxMenu'),
-                'error' => $this->error,
-                'message' => $this->message,
-                'content' => $this->renderTemplate('okved')
-            ]);
-        }
+
 
         public function actionDelete()
         {
@@ -140,5 +119,31 @@
             $this->actionPeopletaxform();
         }
 
+        public function actionAddOkved()
+        {
+            $okved = $this->getModel('okved');
+            $data = core::app()->input->get ?? core::app()->input->post ?? [];
+            try{
+                $this->message = $okved->add($data);
+            }catch(Exception $e){
+                $this->message = 'Отмена операции';
+                $this->error = $e->getMessage();
+            }
+
+            $this->actionOkved();
+        }
+
+        public function actionOkved()
+        {
+            $okved = $this->getModel('okved');
+            $codes = $okved->getOkvedCodes();
+
+            echo $this->renderLayout([
+                'taxMenu' => $this->renderTemplate('taxMenu'),
+                'error' => $this->error,
+                'message' => $this->message,
+                'content' => $this->renderTemplate('okved', ['okvedCodes' => $codes]),
+            ]);
+        }
         
     }
