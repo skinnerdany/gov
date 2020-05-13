@@ -61,3 +61,35 @@ h1{
 .parametr{
     margin-bottom: 0.6rem;
 }
+
+.error{
+    color: red;
+    font-size: 1.15rem;
+    font-style: italic;
+}
+.showPass {
+    margin-top: 3rem;
+    text-align: center;
+}
+.showPass h2{
+    margin: 0 auto 2rem auto;
+}
+.showPass b{
+    letter-spacing: 0.3rem ;
+}
+
+.check_pass{
+    width: 60%;
+    margin: 3rem auto 2rem auto;
+}
+.error_check{
+    text-align:center;
+     margin-top:3rem;
+}
+.life_time{
+    text-align: center;
+    margin-top:3rem;
+    font-size: 1.3rem;
+    font-style: italic;
+    text-decoration: underline;
+}

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,21 +15,19 @@
     <div class="container main">
     <div class="row">
         <div class="col-12">
-        <h1>Таблица данных ГИБДД</h1>
+        <h1>Выдача и проверка пропусков</h1>
         </div>
     </div>
     <div class="row menu" >
         <div class="col-12">
             <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link <?php echo $_GET['action'] === 'add'? 'active' :'' ?>" href="index.php?controller=gibdd&action=add">Добавить</a>
+                <a class="nav-link <?php echo $_GET['action'] === 'getpass'? 'active' :'' ?>  " href="?controller=ivan&action=getpass">Получить пропуск</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php echo $_GET['action'] === 'show'? 'active' :'' ?>" href="index.php?controller=gibdd&action=show">Посмотреть</a>
+                <a class="nav-link <?php echo $_GET['action'] === 'checkpass'? 'active' :'' ?>" href="?controller=ivan&action=checkpass">Проверить пропуск</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link <?php echo $_GET['action'] === 'search'? 'active' :'' ?>" href="index.php?controller=gibdd&action=search">Поиск</a>
-            </li> 
+
             </ul>
         </div>
     </div>
@@ -43,4 +42,5 @@
 
         
     </body>
+    <script src="/js/ivanScript.js"></script>
 </html>
