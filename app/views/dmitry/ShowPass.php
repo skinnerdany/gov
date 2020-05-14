@@ -24,6 +24,8 @@ if(count($data) != 0){
     $second_name    = $data['second_name'];
     $phone          = $data['phone'];
     $email          = $data['email'];
+    $organization_name = $data['organization_name'];
+    $inn            = $data['inn'];
     $social_card    = $data['social_card'] == 0 ? 'Нет' : $data['social_card'];
     $troika         = $data['troika'] == 0 ? 'Нет' : $data['troika'];
     $car_number     = strlen($data['car_number']) == 0 ? 'Нет' : $data['car_number'];
@@ -36,6 +38,8 @@ if(count($data) != 0){
     <p>Фамилия: <?php echo $second_name?></p>
     <p>Телефон: <?php echo $phone?></p>
     <p>Email: <?php echo $email?></p>
+    <p>Органицация: <?php echo $organization_name?></p>
+    <p>ИНН органицации: <?php echo $inn?></p>
     <p>Социальная карта: <?php echo $social_card?></p>
     <p>Тройка: <?php echo $troika?></p>
     <p>Автомобиль: <?php echo $car_number?></p>

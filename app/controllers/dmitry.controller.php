@@ -56,7 +56,7 @@
                 $this->actionGetpass();
             }
 
-            if($res){
+            if(isset($res)){
                 header('Location: /?go=1&controller=dmitry&action=showpass&pass_id='.$res);
             }
 

@@ -109,6 +109,11 @@
             if($this->social_card || $this->troika){
                 $this->unlockTransportCard();
             }
+            if($this->isExistData('pass', ['passport' => $this->passport])){
+                $pass_id = self::$db->select('pass', 'pass_id', ['passport' => $this->passport]);
+                $pass_id = reset($pass_id);
+                $this->pass_id = $pass_id['pass_id'];
+            }
             
             $this->save();
 
@@ -150,18 +155,19 @@
                     'passport'  => $data['passport']
                 ]);
             }
-            $this->tax_id = $this->organization['id'];
-            foreach($data as $key => $value){
-                if(is_numeric($value)){
-                    $this->$key = (int) $value;
-                    continue;
-                }
-                $this->$key = $value;
-            }
 
-            $this->social_card = (int) $this->social_card;
-            $this->troika      = (int) $this->troika;
+            $this->name                 = $data['name'];
+            $this->second_name          = $data['second_name'];
+            $this->tax_id               = $this->organization['id'];
+            $this->organization_name    = $this->organization['organization_name'];
+            $this->email                = $data['email'];
+            $this->phone                = $data['phone'];
+            $this->car_number           = strtoupper($data['car_number']);
+            $this->passport             = (int) $data['passport'];
+            $this->social_card          = (int) $data['social_card'];
+            $this->troika               = (int) $data['troika'];
 
+            return true;
         }
 
         // функция для добавления новых моделей необходимых для работы pass
@@ -239,22 +245,110 @@
             if(strlen($data['second_name']) == 0){
                 throw new Exception('Поле "Фамилия" должно быть заполнено.');
             }
-            if(strlen($data['passport']) == 0){
-                throw new Exception('Поле "Паспорт" должно быть заполнено.');
-            }
             if(strlen($data['email']) == 0){
                 throw new Exception('Поле "Email" должно быть заполнено.');
             }
-            if(strlen($data['phone']) == 0){
-                throw new Exception('Поле "Телефон" должно быть заполнено.');
-            }
-            if(strlen($data['phone']) > 10){
-                throw new Exception('В поле телефон должно быть не более 10 цифр');
-            }
-            if(strlen($data['inn']) == 0){
-                throw new Exception('Поле "ИНН" должно быть заполнено.');
-            }
+
+            $this->validatePhone($data['phone']);
+            $this->validateINN($data['inn']);
+            $this->validatePassport($data['passport']);
+            $this->validateCarNumber($data['car_number']); 
+            $this->validateTroika($data['troika']);
+            $this->validateSocialCard($data['social_card']);
             
             return true;
         }
+
+        private function validatePhone($phone)
+        {
+            if(strlen($phone) == 0){
+                throw new Exception('Поле "Телефон" должно быть заполнено.');
+            }
+            if(strlen($phone) > 10){
+                throw new Exception('В поле телефон должно быть не более 10 цифр');
+            }
+            if(!is_numeric($phone)){
+                throw new Exception('Телефон должен содержать только цифры');
+            }
+
+            return true;
+        }
+
+        private function validateINN($inn)
+        {
+            if(strlen($inn) == 0){
+                throw new Exception('Поле "ИНН" должно быть заполнено.');
+            }
+            if(!is_numeric($inn)){
+                throw new Exception ('ИНН должен содержать только цифры');
+            }
+
+            return true;
+        }
+
+        private function validatePassport($passport)
+        {
+            if(strlen($passport) == 0){
+                throw new Exception('Поле "Паспорт" должно быть заполнено.');
+            }
+        }
+
+        private function validateCarNumber($car)
+        {
+            if(strlen($car) > 0){
+                $pattern = '/^[а-яА-Я]\d{3,}[а-яА-Я]{2,}\d{2,3}$/u';
+                if(preg_match($pattern, $car) === 0){
+                    throw new Exception('Неверный номер автомобиля. Пример: "А123АА999".');
+                }
+            }
+
+            return true;
+        }
+        
+        private function validateTroika($num)
+        {
+            if(strlen($num) > 0 && !is_numeric($num)){
+                throw new Exception('"Тройка" должна содежать только цифры.');
+            }
+        }
+        private function validateSocialCard($num)
+        {
+            if(strlen($num) > 0 && !is_numeric($num)){
+                throw new Exception('Социальная карта должна содежать только цифры.');
+            }
+        }
+
+        // переопределение функции save
+
+        public function save()
+        {
+            return empty($this->tableSchema['pass_id']['value']) ? $this->insert() : $this->update();
+        }
+
+        private function update()
+        {
+            $data = $this->getSaveData();
+            $id = $data['pass_id'];
+            unset($data['pass_id']);
+            return self::$db->update($this->tableName, $data, ['pass_id' => $id]);
+        }
+    
+        private function insert()
+        {
+            $data = $this->getSaveData();
+            return self::$db->insert($this->tableName, $data);
+        }
+        
+        private function getSaveData()
+        {
+            $data = [];
+            foreach ($this->tableSchema as $field => $params) {
+                if (!isset($params['value'])) {
+                    continue;
+                }
+                $data[$field] = $params['value'];
+            }
+            return $data;
+        }
+    
     }
