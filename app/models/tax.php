@@ -23,10 +23,11 @@
             $this->inn =(int) $data['inn'];
 
             $res = $this->save();
-            if($res[0] == 'false'){
+            if($res[0] === false){
                 return 'Что-то пошло не так';
-            }elseif($res[0] == 'true'){
-                core::app()->input->get = [];
+            }elseif($res[0] === true){
+                core::app()->input->post = [];
+                header('Location: /?controller=tax&action=add');                
             }
             return 'Фирма добавлена';
         }
@@ -80,6 +81,9 @@
 
         protected function getIdByInn($inn)
         {
+            if($inn == ''){
+                $inn = 0;
+            }
             return self::$db->select($this->tableName, 'id', ['inn' => $inn]);
         }
 

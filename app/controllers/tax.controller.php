@@ -32,15 +32,17 @@
         public function actionAddOrganization()
         {
             $organization = $this->getModel('tax');
-            $data = core::app()->input->get ?? core::app()->input->post ?? [];
+            $data = core::app()->input->post ?? core::app()->input->get ?? [];
 
-            try{
-                $this->message = $organization->addOrganization($data);
-            }catch(Exception $e){
-                $this->message = 'Отмена операции';
-                $this->error = $e->getMessage();
+            if(core::app()->input->form){
+                try{
+                        $this->message = $organization->addOrganization($data);
+                    }catch(Exception $e){
+                        $this->message = 'Отмена операции';
+                        $this->error = $e->getMessage();
+                    }
             }
-            $this->actionAdd();
+                $this->actionAdd();
         }
 
 
@@ -78,7 +80,7 @@
         public function actionUpdate()
         {
             $organization = $this->getModel('tax');
-            $data = core::app()->input->get ?? core::app()->input->post ?? [];
+            $data = core::app()->input->post ?? core::app()->input->get ?? [];
             try{
                 if(core::app()->input->form == 1){
                     $organization->update($data);
@@ -107,7 +109,7 @@
         public function actionPeopletaxadd()
         {
             $peopleTax = $this->getModel('people_tax');
-            $data = core::app()->input->get ?? core::app()->input->post ?? [];
+            $data = core::app()->input->post ?? core::app()->input->get ?? [];
             try{
                 $peopleTax->add($data);
                 $this->message = 'База данных обновлена';
@@ -122,7 +124,7 @@
         public function actionAddOkved()
         {
             $okved = $this->getModel('okved');
-            $data = core::app()->input->get ?? core::app()->input->post ?? [];
+            $data = core::app()->input->post ?? core::app()->input->get ?? [];
             try{
                 $this->message = $okved->add($data);
             }catch(Exception $e){

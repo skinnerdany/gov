@@ -57,7 +57,7 @@
             }
 
             if(isset($res)){
-                header('Location: /?go=1&controller=dmitry&action=showpass&pass_id='.$res);
+                //header('Location: /?go=1&controller=dmitry&action=showpass&pass_id='.$res);
             }
 
         }

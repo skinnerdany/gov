@@ -43,6 +43,22 @@
         'troika' => 
             array (size=1)
             'type' => string 'int' (length=3)
+
+        по поводу метода dmitryPass::aggregateData - тут несколько моментов на мой взгляд не очень верны
+        если в таблице mfc - нет указаного в пропуске паспорта, то вставлять эти данные не надо, 
+        т.к. значит паспорт неправильно вбит
+        он должен проверяться а не добавляться через эту форму
+        с социальным транспортом - аналогично примерно
+        только в случае, если в пропуске указана тройка, 
+        а в social_transport для этой тройки нет паспорта, то моно 
+        данные о тройке дозаполнить, тем самым привязав ее без палева к паспорту
+        с gibdd - аналогично. Может так получиться, что при оформлении пропуска ошибся циферкой и 
+        несуществующий номер машины указал - надо проверить, но не регестрировать на основе этого новую машину
+
+        просто в реальной системе так делать не стоит
+        более того, даже на этапе разработки такие штуки для удобства лучше не 
+        делать, ибо перед деплоем если это забыть удалить, то будет оч печально)
+
      */
     class dmitryPass extends model
     {
@@ -77,8 +93,6 @@
             }
             $this->validateData($data);
             $this->addModel('tax');
-            $this->addModel('okved');
-            $this->addModel('people_tax');
             
             $this->setOrganization($data);
             $this->aggregateData($data);
@@ -104,7 +118,8 @@
         {
             $this->create_date = time();
             $this->expire_date = time() + 60*60*24*15; // +15 дней;
-            $this->pass_id     = $this->getPassId();
+            $this->new_pass_id = $this->getPassId();
+            $this->pass_id     = $this->new_pass_id;
             
             if($this->social_card || $this->troika){
                 $this->unlockTransportCard();
@@ -113,6 +128,7 @@
                 $pass_id = self::$db->select('pass', 'pass_id', ['passport' => $this->passport]);
                 $pass_id = reset($pass_id);
                 $this->pass_id = $pass_id['pass_id'];
+                unset($this->new_pass_id);
             }
             
             $this->save();
@@ -128,7 +144,7 @@
         protected function aggregateData($data)
         {
             if(!$this->isExistData('mfc', ['passport' => $data['passport']] )){
-                $this->addData('mfc', [
+/*                 $this->addData('mfc', [
                     'name'          => $data['name'],
                     'second_name'   => $data['second_name'],
                     'passport'      => $data['passport'],
@@ -136,7 +152,9 @@
                     'social_card'   => (int)$data['social_card'],
                     'email'         => $data['email'],
                     'phone'         => $data['phone'] // 10 цифр
-                ]);
+                ]); */
+
+                throw new Exception('Возможно Вы ввели неверный номер паспорта');
             }
 
             if(!$this->isExistData('social_transport', ['passport' => $data['passport']])){
@@ -149,20 +167,21 @@
                 ]);
             }
 
-            if(!$this->isExistData('gibdd', ['nunmber' => $data['car_number']])){
-                $this->addData('gibdd', [
-                    'nunmber'   => $data['car_number'],
+            if(!$this->isExistData('gibdd', ['number' => $data['car_number']])){
+/*                 $this->addData('gibdd', [
+                    'number'   => $data['car_number'],
                     'passport'  => $data['passport']
-                ]);
+                ]); */
+                throw new Exception('Автомобиль с таким номером не зарегистрирован');
             }
-
             $this->name                 = $data['name'];
             $this->second_name          = $data['second_name'];
             $this->tax_id               = $this->organization['id'];
             $this->organization_name    = $this->organization['organization_name'];
+            $this->inn                  = $this->organization['inn'];
             $this->email                = $data['email'];
             $this->phone                = $data['phone'];
-            $this->car_number           = strtoupper($data['car_number']);
+            $this->car_number           = mb_strtoupper($data['car_number']);
             $this->passport             = (int) $data['passport'];
             $this->social_card          = (int) $data['social_card'];
             $this->troika               = (int) $data['troika'];
@@ -319,10 +338,9 @@
         }
 
         // переопределение функции save
-
         public function save()
         {
-            return empty($this->tableSchema['pass_id']['value']) ? $this->insert() : $this->update();
+            return isset($this->new_pass_id) ? $this->insert() : $this->update();
         }
 
         private function update()
@@ -336,7 +354,8 @@
         private function insert()
         {
             $data = $this->getSaveData();
-            return self::$db->insert($this->tableName, $data);
+            $res = self::$db->insert($this->tableName, $data);
+            return $res;
         }
         
         private function getSaveData()
@@ -348,7 +367,8 @@
                 }
                 $data[$field] = $params['value'];
             }
+
             return $data;
         }
-    
+
     }

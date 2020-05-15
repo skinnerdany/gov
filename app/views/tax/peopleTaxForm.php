@@ -1,4 +1,4 @@
-<form action="/?controller=tax&action=peopletaxadd" method="get">
+<form action="/?controller=tax&action=peopletaxadd" method="POST">
 <fieldset>
         <legend>Привязать человека к работе</legend>
         <div class="input_block">

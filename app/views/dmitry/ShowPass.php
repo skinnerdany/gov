@@ -18,7 +18,7 @@
 
   
 if(count($data) != 0){
-
+    var_dump($data);
     $number         = $data['pass_id'];
     $name           = $data['name'];
     $second_name    = $data['second_name'];

@@ -1,5 +1,5 @@
 <?php
-    foreach(core::app()->input->get as $name => $value){
+    foreach(core::app()->input->post as $name => $value){
         $$name = $value;
     }
 
@@ -8,7 +8,7 @@
     }
 ?>
 
-<form action="/?controller=tax&action=addOkved" method="GET">
+<form action="/?controller=tax&action=addOkved" method="POST">
     <fieldset>
         <legend>Добавить/Изменить ОКВЭД</legend>
         <div class="input_block">
