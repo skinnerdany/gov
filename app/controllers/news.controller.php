@@ -1,5 +1,5 @@
 <?php
 
-class NewsController extends controller {
+class ControllerNews extends controller {
     
 }
