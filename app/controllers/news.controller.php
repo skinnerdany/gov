@@ -2,18 +2,17 @@
 
 class ControllerNews extends controller {
     protected $layoutFile = 'newsLayout';
-    protected $error = '';
-    protected $message = '';
 
     public function actionAdd(){
-       
+    }
+
+    public function actionShow(){
+        echo $this->renderLayout([]);
     }
 
     public function actionUpdate(){
-        
     }
 
     public function actionDelete(){
-        
     }
 }
