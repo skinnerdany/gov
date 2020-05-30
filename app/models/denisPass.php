@@ -1,5 +1,5 @@
 <?php
 
-class News extends model {
+class denisPass extends model {
     
 }
