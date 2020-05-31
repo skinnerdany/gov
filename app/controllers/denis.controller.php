@@ -5,7 +5,7 @@ class ControllerDenis extends controller {
     protected $layoutFile = 'denisPassLayout';
     
     public function actionCreatePass(){
-        if (core::app()->input->form()){
+        if (core::app()->input->form){
             $passData = $this->getModel('denisPass')->generatePass(core::app()->input->post);
             //code for pass
             echo $this->renderLayout([
@@ -20,7 +20,7 @@ class ControllerDenis extends controller {
     }
 
     public function actionCheckPass(){
-        if (core::app()->input->form()){
+        if (core::app()->input->form){
             $checkData = $this->getModel('denisPass')->check(core::app()->input->post['pass code']);
             // code for check pass
             echo $this->renderLayout([
