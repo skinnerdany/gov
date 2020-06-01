@@ -1,0 +1,142 @@
+<h2 class="mb-3">Запрос цифрового пропуска на передвижение по городу</h2>
+<a type="button" href="index.php?controller=denis&action=checkpass" class="btn btn-success mb-3">Проверить</a>
+<p>Тип цифрового пропуска</p>
+<select class="custom-select mb-3">
+    <option value="Цифровой пропуск для работающих">Цифровой пропуск для работающих</option>
+    <option value="Цифровой пропуск для неработающих">Цифровой пропуск для неработающих</option>
+</select>
+<form class="needs-validation" novalidate>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="validationCustom01">Фамилия</label>
+            <input type="text" class="form-control" id="validationCustom01" placeholder="Петров" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="validationCustom02">Имя</label>
+            <input type="text" class="form-control" id="validationCustom02" placeholder="Петр" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="validationCustom03">Отчество</label>
+            <input type="text" class="form-control" id="validationCustom03" placeholder="Петрович" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom03">Телефон</label>
+            <input type="text" class="form-control" id="validationCustom03" placeholder="Телефон" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom04">Электронная почта</label>
+            <input type="email" class="form-control" id="validationCustom04" placeholder="Электронная почта" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+    </div>
+    <p>Документ, удостоверяющий личность</p>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom05">Тип документа</label>
+            <select class="custom-select" id="validationCustom05" placeholder="Тип документа" required>
+                <option value="Цифровой пропуск для работающих">Паспорта гражданина РФ</option>
+            </select>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom06">Номер документа</label>
+            <input type="text" class="form-control" id="validationCustom06" placeholder="Номер документа" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+    </div>
+    <div class="custom-control custom-checkbox custom-control-inline mb-3">
+        <input type="checkbox" id="customCheckInline1" name="customCheck1" class="custom-control-input" onclick="dynInput(this);">
+        <label class="custom-control-label" for="customCheckInline1">Передвигаюсь на личном или служебном транспорте</label>
+    </div>
+    <div class="custom-control custom-checkbox custom-control-inline mb-3">
+        <input type="checkbox" id="customCheckInline2" name="customCheck2" class="custom-control-input" onclick="dynInput(this);">
+        <label class="custom-control-label" for="customCheckInline2">Передвигаюсь на общественном транспорте</label>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom07">Номер водительского удостоверения</label>
+            <input type="text" class="form-control" id="validationCustom07" placeholder="Номер водительского удостоверения" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom08">Государственный номер автомобиля</label>
+            <input type="text" class="form-control" id="validationCustom08" placeholder="Государственный номер автомобиля" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom09">Номер карты "Тройка"</label>
+            <input type="text" class="form-control" id="validationCustom09" placeholder="Номер карты 'Тройка'" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom10">Номер социальной карты</label>
+            <input type="text" class="form-control" id="validationCustom10" placeholder="Номер социальной карты" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom11">Работодатель</label>
+            <input type="text" class="form-control" id="validationCustom11" placeholder="Работодатель" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom12">ИНН организации</label>
+            <input type="text" class="form-control" id="validationCustom12" placeholder="ИНН организации" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline mb-3">
+            <input type="checkbox" id="customCheckInline3" name="customCheck3" class="custom-control-input">
+            <label class="custom-control-label" for="customCheckInline3">Предприятие непрерывного цикла</label>
+        </div>
+    </div>
+    <p>Срок действия</p>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom13">Дата начала действия</label>
+            <input type="date" class="form-control" id="validationCustom13" placeholder="Дата начала действия" required>
+            <div class="valid-feedback">
+                Заполнено верно!
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom14">Дата окончания действия</label>
+            <input type="text" class="form-control" id="validationCustom14" placeholder="Дата окончания действия" value="14.06.2020" readonly>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Получить</button>
+</form>
