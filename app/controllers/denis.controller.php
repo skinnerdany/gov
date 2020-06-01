@@ -6,10 +6,10 @@ class ControllerDenis extends controller {
     
     public function actionCreatePass(){
         if (core::app()->input->form){
-            $passData = $this->getModel('denisPass')->generatePass(core::app()->input->post);
+            $passData['post'] = $this->getModel('denisPass')->generatePass(core::app()->input->post);
             //code for pass
             echo $this->renderLayout([
-                'content' => $this->renderTemplate('showPass',$passData)
+                'content' => $this->renderTemplate('showPass', $passData)
             ]);
             return;
         }
@@ -20,14 +20,15 @@ class ControllerDenis extends controller {
     }
 
     public function actionCheckPass(){
+        $checkData = [];
         if (core::app()->input->form){
             $checkData = $this->getModel('denisPass')->check(core::app()->input->post['pass code']);
             // code for check pass
             echo $this->renderLayout([
-                'content' => $this->renderTemplate('checkResult', $checkData)
+                'content' => $this->renderTemplate('checkResult', ['checkData' => $checkData])
             ]);
         }
-        // code for pass-form
+        // code for pass form
         echo $this->renderLayout([
             'content' => $this->renderTemplate('checkForm')
         ]);

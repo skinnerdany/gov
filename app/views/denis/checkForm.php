@@ -11,3 +11,4 @@
     </div>
     <button type="submit" class="btn btn-success mb-3">Проверить</button>
 </form>
+<a href="index.php?controller=denis&action=createpass" class="btn btn-primary mb-3">Оформить пропуск</a>

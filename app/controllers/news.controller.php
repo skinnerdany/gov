@@ -34,7 +34,7 @@ class ControllerNews extends controller {
     }
 
     public function actionDelete(){
-        $news = $this->getModel('news')->delete(core::app()->input->get['newsTitle']);
+        $news = $this->getModel('news')->delete(core::app()->get['newsTitle']);
         $this->actionShow();
     }
 }
