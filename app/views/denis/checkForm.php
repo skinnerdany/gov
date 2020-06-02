@@ -1,5 +1,5 @@
 <h2>Проверка цифрового пропуска</h2>
-<form class="needs-validation" novalidate>
+<form method="post" class="needs-validation" novalidate>
     <div class="form-row">
         <div class="col-md-4 mb-3">
             <label for="validationCustom01"></label>

@@ -4,19 +4,15 @@ class ControllerNews extends controller {
     protected $layoutFile = 'newsLayout';
 
     public function actionAdd(){
-        $news = '';
-        $data = null;
-        $error = false;
+        $news = [];
         if(core::app()->input->form){
             try{
                 $news = $this->getModel('news')->add(core::app()->input->post);
             } catch(Exception $e) {
                 $news = $e->getMessage();
-                $error = true;
-                $data = core::app()->input->post;
             }
         }
-        $content = $this->renderTemplate('add', ['news' => $news, 'error' => $error, 'data' => $data]);
+        $content = $this->renderTemplate('add', ['news' => $news]);
         echo $this->renderLayout(['content' => $content]);
     }
 
@@ -28,13 +24,13 @@ class ControllerNews extends controller {
     }
 
     public function actionUpdate(){
-        $news = $this->getModel('news')->update();
+        $news = $this->getModel('news')->update(core::app()->input->request);
         $content = $this->renderTemplate('update', $news);
         echo $this->renderLayout(['content' => $content]);
     }
 
     public function actionDelete(){
-        $news = $this->getModel('news')->delete(core::app()->get['newsTitle']);
+        $this->getModel('news')->delete(core::app()->input->get['newsTitle']);
         $this->actionShow();
     }
 }

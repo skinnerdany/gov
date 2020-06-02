@@ -5,7 +5,7 @@
     <option value="Цифровой пропуск для работающих">Цифровой пропуск для работающих</option>
     <option value="Цифровой пропуск для неработающих">Цифровой пропуск для неработающих</option>
 </select>
-<form action="post" class="needs-validation" novalidate>
+<form method="post" class="needs-validation" novalidate>
     <div class="form-row">
         <div class="col-md-6 mb-3">
             <label for="validationCustom01">Фамилия</label>
