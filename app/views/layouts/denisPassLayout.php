@@ -11,6 +11,14 @@
 <body>
     <div class="d-flex justify-content-center">
         <div class="container w-75 p-3">
+            <?php if (isset($_SESSION["message"])) : ?>
+                <div class="alert w-50 alert-<?= $_SESSION["msg_type"] ?>">
+                    <?php
+                    echo $_SESSION["message"];
+                    unset($_SESSION["message"]);
+                    ?>
+                </div>
+            <?php endif; ?>
             <?php echo $content; ?>
         </div>
     </div>

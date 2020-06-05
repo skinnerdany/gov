@@ -8,11 +8,10 @@
                 <input type="text" name="newsTitle" class="w-50">
             </h5>
             <p class="card-text">
-                <textarea type="text" name="newsContent" class="w-50">
-            </textarea>
+                <input type="text" name="newsContent" class="w-50">
             </p>
             <a href="index.php?controller=news&action=show" class="btn btn-primary">К новостям</a>
-            <a type="submit" href="index.php?controller=news&action=add" class="btn btn-success">Добавить</a>
+            <a type="submit" href="index.php?controller=news&action=add" name="go" class="btn btn-success">Добавить</a>
         </div>
     </div>
 </form>

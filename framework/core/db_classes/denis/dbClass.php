@@ -34,7 +34,7 @@ class dbClass implements ifDb
 
     public function escape(string $value) : string
     {
-        return mysqli_escape_string($this->connection, $value);
+        return mysqli_real_escape_string($this->connection, $value);
     }
 
     public function select(string $table, $fields = '*', array $where = []) : array
@@ -53,7 +53,7 @@ class dbClass implements ifDb
         $insertSqlValues = [];
         foreach ($data as $field => $value) {
             $insertSqlFields[] = $field;
-            $insertSqlValues[] = "'" . $this->escape($value) . "'";
+            $insertSqlValues[] = "'" . $value . "'";
         }
         $sql .= '(' . implode(',', $insertSqlFields) . ') VALUES (' .implode(',', $insertSqlValues) . ')';
         $result = $this->query($sql);
@@ -76,7 +76,7 @@ class dbClass implements ifDb
         
         $updateData = [];
         foreach ($data as $field => $value) {
-            $updateData[] = $field . '=\'' . $this->escape($value) . "'";
+            $updateData[] = $field . '=\'' . $value . "'";
         }
         $sql .= implode(',', $updateData);
         $sql .= $this->getWhere($where);
@@ -89,7 +89,7 @@ class dbClass implements ifDb
         if (is_array($where) && !empty($where)) {
             $whereSql = [];
             foreach ($where as $field => $value) {
-                $whereSql[] = $field . '=\'' . $this->escape($value) . "'";
+                $whereSql[] = $field . '=\'' . $value . "'";
             }
             if (!empty($whereSql)) {
                 $sql .= ' WHERE ' . implode(' AND ', $whereSql);

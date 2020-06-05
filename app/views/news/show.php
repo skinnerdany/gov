@@ -8,7 +8,7 @@
                 echo '<div class="card-body">';
                 echo '<h5 class="card-title">' .$note['newsTitle']. '</h5>';
                 echo '<p class="card-text">' .$note['newsContent']. '</p>';
-                echo '<a href="index.php?controller=news&action=add&newsTitle=' .$note['newsTitle']. '" class="btn btn-success">Добавить</a>';
+                echo '<a href="index.php?controller=news&action=add" class="btn btn-success">Добавить</a>';
                 echo'&nbsp;';
                 echo '<a href="index.php?controller=news&action=update&newsTitle=' .$note['newsTitle']. '" class="btn btn-warning">Обновить</a>';
                 echo'&nbsp;';

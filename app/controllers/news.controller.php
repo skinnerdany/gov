@@ -24,7 +24,7 @@ class ControllerNews extends controller {
     }
 
     public function actionUpdate(){
-        $news = $this->getModel('news')->update(core::app()->input->request);
+        $news = $this->getModel('news')->update(core::app()->input->get['newsTitle']);
         $content = $this->renderTemplate('update', $news);
         echo $this->renderLayout(['content' => $content]);
     }
