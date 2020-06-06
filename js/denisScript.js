@@ -15,12 +15,18 @@ window.addEventListener('load', function () {
 // toggle display organization
 var type = document.getElementById('type_pass');
 var div = document.getElementById('const_pass');
+var org = document.getElementById('organization');
+var inn = document.getElementById('inn');
 
 type.addEventListener('click', function(){
     if(type.value === 'temp'){
         div.style.display = 'none';
+        org.required = false;
+        inn.required = false;
     } else {
         div.style.display = 'flex';
+        org.required = true;
+        inn.required = true;
     }
 });
 
@@ -63,14 +69,21 @@ var worker = document.getElementById('worker');
 var personal = document.getElementById('personal');
 var notworker = document.getElementById('notworker');
 var public = document.getElementById('public');
+var number = document.getElementById('number');
 
 worker.addEventListener('change', function(){
     if(worker.checked){
         personal.style.display = 'flex';
+        troika.required = false;
+        social_card = false;
         notworker.setAttribute('disabled', null);
+        notworker.required = false;
     }else {
         personal.style.display = 'none';
+        troika.required = true;
+        social_card = true;
         notworker.removeAttribute('disabled');
+        notworker.required = true;
     }
 })
 
@@ -78,9 +91,13 @@ notworker.addEventListener('change', function(){
     if(notworker.checked){
         public.style.display = 'flex';
         worker.setAttribute('disabled', null);
+        worker.required = false;
+        number.required = false;
     }else {
         public.style.display = 'none';
         worker.removeAttribute('disabled');
+        worker.required = true;
+        number.required = true;
     }
 })
 
