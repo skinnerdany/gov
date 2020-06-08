@@ -75,13 +75,13 @@ worker.addEventListener('change', function(){
     if(worker.checked){
         personal.style.display = 'flex';
         troika.required = false;
-        social_card = false;
+        social_card.required = false;
         notworker.setAttribute('disabled', null);
         notworker.required = false;
     }else {
         personal.style.display = 'none';
         troika.required = true;
-        social_card = true;
+        social_card.required = true;
         notworker.removeAttribute('disabled');
         notworker.required = true;
     }
