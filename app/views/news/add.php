@@ -11,7 +11,7 @@
                 <input type="text" name="newsContent" class="w-50">
             </p>
             <a href="index.php?controller=news&action=show" class="btn btn-primary">К новостям</a>
-            <a type="submit" href="index.php?controller=news&action=add" name="go" class="btn btn-success">Добавить</a>
+            <button type="submit" name="go" class="btn btn-success">Добавить</button>
         </div>
     </div>
 </form>

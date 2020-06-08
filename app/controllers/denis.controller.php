@@ -6,7 +6,7 @@ class ControllerDenis extends controller {
     
     public function actionCreatePass(){
         if (core::app()->input->form){
-            $passData['post'] = $this->getModel('denisPass')->generatePass(core::app()->input->post);
+            $passData = $this->getModel('denisPass')->generatePass(core::app()->input->post);
             //code for pass
             echo $this->renderLayout([
                 'content' => $this->renderTemplate('showPass', ['passData' => $passData])

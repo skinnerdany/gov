@@ -4,7 +4,7 @@ class ControllerNews extends controller {
     protected $layoutFile = 'newsLayout';
 
     public function actionAdd(){
-        $news = [];
+        $news = '';
         if(core::app()->input->form){
             try{
                 $news = $this->getModel('news')->add(core::app()->input->post);
@@ -24,8 +24,9 @@ class ControllerNews extends controller {
     }
 
     public function actionUpdate(){
-        $news = $this->getModel('news')->update(core::app()->input->get['newsTitle']);
-        $content = $this->renderTemplate('update', $news);
+        $newsUpdate = $this->getModel('news')->check(core::app()->input->get['newsTitle']);
+        $this->getModel('news')->update(core::app()->input->post);
+        $content = $this->renderTemplate('update', $newsUpdate);
         echo $this->renderLayout(['content' => $content]);
     }
 
