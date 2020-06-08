@@ -117,7 +117,7 @@
             <label for="inn">ИНН организации</label>
             <input type="text" class="form-control" id="inn" placeholder="ИНН организации" name="inn" required value=<?php echo $post['inn'] ?? "" ?>>
             <div class="invalid-feedback">
-                Введите верный ИНН!
+                Введите 9 цифр ИНН!
             </div>
         </div>
     </div>
