@@ -5,7 +5,7 @@ class denisPass extends model
     public function generatePass(array $post)
     {
         $postMfc = $this->checkMfc($post);
-        $this->checkTransport($post, $postMfc);
+        $this->checkTransport($post);
         if ($post['type_pass'] === 'const') {
             $tax_id = $this->CheckWork($post);
         }
@@ -64,9 +64,29 @@ class denisPass extends model
         return $postMfc;
     }
 
-    private function checkTransport(array $post, $postMfc)
+    private function checkTransport(array $post)
     {
-        
+        if(isset($post['workerCheck']) && $post['workerCheck'] === 'on'){
+            if(!preg_match('#^[а-я]{1}\d{3}[а-я]{2}\d{2,3}#u', $post['number']) || strlen($post['number'])>9){
+                $_SESSION["message"] = "Проверьте номер автомобиля";
+                $_SESSION["msg_type"] = "warning";
+            }
+            $checkNumber = self::$db->select('gibdd', '*', ['number' => $post['number']]);
+            if(empty($checkNumber)){
+                $_SESSION["message"] = "Автомобиля с таким номером нет";
+                $_SESSION["msg_type"] = "warning";
+            }
+        }
+        if(isset($post['notworkerCheck']) && $post['notworkerCheck'] === 'on'){
+            if(!preg_match('#^-?[0-9]*$#',$post['social_card']) || strlen($post['social_card']) >9){
+                $_SESSION["message"] = "Проверьте номер социальной карты";
+                $_SESSION["msg_type"] = "warning";
+            }
+            if(!preg_match('#^-?[0-9]*$#', $post['troika']) || strlen($post['troika']) >9){
+                $_SESSION["message"] = "Проверьте номер карты 'Тройка'";
+                $_SESSION["msg_type"] = "warning";
+            }
+        }
     }
 
     private function CheckWork(array $post)
@@ -120,10 +140,10 @@ class denisPass extends model
 
     public function check($pass_id)
     {
-        $check = self::$db->select('pass', '*', ['pass_id' => $pass_id]);
-        if (empty($check)) {
+        $checkPassid = self::$db->select('pass', '*', ['pass_id' => $pass_id]);
+        if (empty($checkPassid)) {
             throw new Exception('Пропуск не найден', 1);
         }
-        return reset($check);
+        return reset($checkPassid);
     }
 }

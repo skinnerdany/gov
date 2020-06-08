@@ -1,6 +1,6 @@
 <?php
-    $worker = isset($post['worker']) && $post['worker'] === 'on' ? 'checked' : ''; 
-    $notworker = isset($post['notworker']) && $post['notworker'] === 'on' ? 'checked' : ''; 
+    $workerCheck = isset($post['workerCheck']) && $post['workerCheck'] === 'on' ? 'checked' : ''; 
+    $notworkerCheck = isset($post['notworkerCheck']) && $post['notworkerCheck'] === 'on' ? 'checked' : ''; 
     $const = isset($post['type_pass']) && $post['type_pass'] === 'const' ? 'on' : ''; 
     $temp = isset($post['type_pass']) && $post['type_pass'] === 'temp' ? 'on' : ''; 
 ?>
