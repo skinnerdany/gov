@@ -6,7 +6,6 @@
         Контроль соблюдения режима самоизоляции может осуществляться с помощью данных мобильных операторов и банков.<br/>
         Выход без регистрации влечет административную ответственность в соответствии с законодательством
     </p>
-  </div>
         <hr class="mb-4">
         <h4 class="mb-3">Выберите сервис</h4>
         <div class="d-block my-3" id="radios">
@@ -25,6 +24,4 @@
         </div>
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="chooseService()">Продолжить</button>
-    </div>
-  </div>
 

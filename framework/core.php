@@ -92,4 +92,11 @@ class core
         $controllerObj->afterAction();
         $controllerObj->response($outputData);
     }
+    
+        
+    public static function print_d($data = []){
+        echo '<pre>';
+        print_r($data);
+        echo '<pre>';
+    }
 }

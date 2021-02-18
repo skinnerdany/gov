@@ -41,16 +41,13 @@
   echo $vyacheslavTemplate;
 ?>
    <footer class="my-5 pt-5 text-muted text-center text-small">
+       <a href="/pass/chooseservice">Вернуться на страницу выбора услуги</a>
     <p class="mb-1">&copy; 2019-2020 Финальный проект студента курса "Fullstack Web-Developer"<br/> 
        израильской высшей школы информационных технологий и безопасности "HackerU"<br/>
        Грошева Вячеслава Владимировича.
     </p>
-    <img class="d-block mx-auto mb-4" src="/app/src/images/logo/hackeru-logo.png" alt="" width="100" height="auto">
-<!--    <ul class="list-inline">
-      <li class="list-inline-item"><a href="#">Privacy</a></li>
-      <li class="list-inline-item"><a href="#">Terms</a></li>
-      <li class="list-inline-item"><a href="#">Support</a></li>
-    </ul>-->
+    <img class="d-block mx-auto mb-4" src="/app/src/images/logo/hackeru-logo.png" alt="" width="100">
+
   </footer>
 </div>
         <script>

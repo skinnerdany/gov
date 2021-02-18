@@ -1,7 +1,3 @@
-<?php
-  
-?>
-
 
 <div class="col">
       <h4 class="mb-3">Оформление пропуска</h4>
@@ -18,7 +14,7 @@
         </div>
        <div class="mb-3">
           <label for="passport">Номер вашего паспорта</label>
-          <input type="text" class="form-control" name="passport" value="" id="passport" placeholder="1122333444" required>
+          <input type="text" class="form-control" name="passport" value="" id="passport" placeholder="9 цифр" required>
         </div>
 
         <div class="row">
@@ -35,7 +31,7 @@
 
           <div class="col-md-6 mb-3">
             <label for="phone">Ваш телефон</label>
-            <input type="text" class="form-control" name="phone" value="" id="phone" placeholder="9991118822" required>
+            <input type="text" class="form-control" name="phone" value="" id="phone" placeholder="10 цифр" required>
           </div>
         </div>
 
@@ -47,13 +43,13 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="inn">ИНН организации</label>
-          <input type="text" class="form-control" name="inn" value="" id="inn" placeholder="123456789012" required>
+          <input type="text" class="form-control" name="inn" value="" id="inn" placeholder="9 цифр" required>
         </div>
         
 
         <div class="col-md-6 mb-3">
           <label for="taxid">Ваш СНИЛС</label>
-          <input type="text" class="form-control" name="tax_id" value="" id="tax-id" placeholder="12345678901" required>
+          <input type="text" class="form-control" name="tax_id" value="" id="tax-id" placeholder="9 цифр" required>
         </div>
       </div>
         
@@ -68,12 +64,12 @@
 
         <div class="col-md-4 mb-3">
           <label for="socialcard">Социальная карта</label>
-          <input type="text" class="form-control" name="social_card" value="" id="social_card" placeholder="5555333">
+          <input type="text" class="form-control" name="social_card" value="" id="social_card" placeholder="9 цифр">
         </div>
           
           <div class="col-md-4 mb-3">
           <label for="troika">Карта тройка</label>
-          <input type="text" class="form-control" name="troika" value="" id="troika" placeholder="123456789">
+          <input type="text" class="form-control" name="troika" value="" id="troika" placeholder="6 цифр">
         </div>
       </div>
           <br/>
@@ -81,3 +77,21 @@
       </form>
 
 
+      
+<script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$('#car_number').change(function(){
+	$('#social_card').prop('disabled', true);
+        $('#troika').prop('disabled', true);
+});
+
+$('#social_card').change(function(){
+	$('#car_number').prop('disabled', true);
+        $('#troika').prop('disabled', true);
+});
+
+$('#troika').change(function(){
+	$('#car_number').prop('disabled', true);
+        $('#social_card').prop('disabled', true);
+});
+</script>
